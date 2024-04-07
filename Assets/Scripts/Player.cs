@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     private Target target;
     private TargetView targetView;
+    private TargetView MeView;
 
     private Collider2D dialogue;
 
@@ -49,11 +50,13 @@ public class Player : MonoBehaviour
         target = null;
         targetView = GameObject.FindWithTag("TargetView").GetComponent<TargetView>();
         targetView.UpdateTarget(null);
+        MeView = GameObject.FindWithTag("MeView").GetComponent<TargetView>();
         MeTarget = GetComponent<Target>();
     }
 
     void Update()
     {
+        MeView.UpdateTarget(MeTarget);
         attTimer -= Time.deltaTime;
         Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"),
             Input.GetAxis("Vertical"), 0).normalized;
@@ -190,6 +193,11 @@ public class Player : MonoBehaviour
     }
     IEnumerator Attack()
     {
+        if(attTarget == null)
+        {
+            StopAttack();
+            yield break;
+        }
         string att = "Attack" + UnityEngine.Random.Range(1, 4);
         animator.SetTrigger(att);
         yield return new WaitForSeconds(myEntity.GetAttSpd() + myEntity.GetWeapon().GetAttSpeed());

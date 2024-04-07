@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class TargetView : MonoBehaviour
 {
-    private Target target = null;
+    protected Target target = null;
 
-    [SerializeField] private GameObject content;
-    [SerializeField] private GameObject icon;
-    [SerializeField] private TMPro.TMP_Text nameField;
-    [SerializeField] private Bar hp;
-    [SerializeField] private Bar mp;
+    [SerializeField] protected GameObject content;
+    [SerializeField] protected GameObject icon;
+    [SerializeField] protected TMPro.TMP_Text nameField;
+    [SerializeField] protected Bar hp;
+    [SerializeField] protected Bar mp;
 
-    private Target subtarget;
-    [SerializeField] private GameObject subtargetContent;
-    [SerializeField] private TMPro.TMP_Text subtargetName;
-    [SerializeField] private Bar subtargetHp;
-    [SerializeField] private Bar subtargetMp;
+    protected Target subtarget;
+    [SerializeField] protected GameObject subtargetContent;
+    [SerializeField] protected TMPro.TMP_Text subtargetName;
+    [SerializeField] protected Bar subtargetHp;
+    [SerializeField] protected Bar subtargetMp;
 
     public void UpdateTarget(Target t)
     {
@@ -27,16 +27,19 @@ public class TargetView : MonoBehaviour
             content.SetActive(true);
             Destroy(icon);
             icon = Instantiate(target.GetIcon(), content.transform);
-            if (target.GetTarget() != null)
+            if (subtargetContent != null)
             {
-                subtarget = target.GetTarget();
-                subtargetContent.SetActive(true);
-                ChangeSubtargetValues();
-            }
-            else
-            {
-                subtarget = null;
-                subtargetContent.SetActive(false);
+                if (target.GetTarget() != null)
+                {
+                    subtarget = target.GetTarget();
+                    subtargetContent.SetActive(true);
+                    ChangeSubtargetValues();
+                }
+                else
+                {
+                    subtarget = null;
+                    subtargetContent.SetActive(false);
+                }
             }
             ChangeValues();
         }
@@ -45,20 +48,23 @@ public class TargetView : MonoBehaviour
             content.SetActive(false);
         }
     }
-    private void Update()
+    protected void Update()
     {
         if (target != null)
         {
             subtarget = target.GetTarget();
-            if (subtarget != null)
-                subtargetContent.SetActive(true);
-            else
-                subtargetContent.SetActive(false);
+            if (subtargetContent != null)
+            {
+                if (subtarget != null)
+                    subtargetContent.SetActive(true);
+                else
+                    subtargetContent.SetActive(false);
+            }
         }
         if (target != null) ChangeValues();
-        if (subtarget != null) ChangeSubtargetValues();
+        if (subtarget != null && subtargetContent != null) ChangeSubtargetValues();
     }
-    private void ChangeValues()
+    protected virtual void ChangeValues()
     {
         nameField.text = target.GetName();
 
@@ -68,7 +74,7 @@ public class TargetView : MonoBehaviour
         mp.ChangeMaxValueTo(target.GetMaxMp());
         mp.ChangeValueTo(target.GetMp());
     }
-    private void ChangeSubtargetValues()
+    protected virtual void ChangeSubtargetValues()
     {
         subtargetName.text = subtarget.GetName();
 

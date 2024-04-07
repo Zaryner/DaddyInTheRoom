@@ -19,9 +19,31 @@ public class Target : MonoBehaviour
         me = GetComponent<Entity>();
     }
 
-    public void TakeDamage(int d)
+    public void TakeDamage(int d,Target source)
     {
         me.TakeDamage(d);
+        if (me.GetHp() <= 0 && type == TargetType.mob)
+        {
+            source.AddExp((int)(GetExp()*0.25));
+
+            source.target = null;
+            if(source.type == TargetType.player)
+            {
+                GameObject.FindWithTag("TargetView").GetComponent<TargetView>().UpdateTarget(null);
+            }
+            Destroy(this.gameObject);
+        }
+    }
+    public void AddExp(int exp)
+    {
+        if (type == TargetType.player)
+        {
+            me.AddExp(exp);
+            if (me.GetExp() >= me.GetMaxExp())
+            {
+
+            }
+        }
     }
     public TargetType GetTargetType()
     {
@@ -42,6 +64,14 @@ public class Target : MonoBehaviour
     public int GetHp()
     {
         return me.GetHp();
+    }
+    public int GetMaxExp()
+    {
+        return me.GetMaxExp();
+    }
+    public int GetExp()
+    {
+        return me.GetExp();
     }
     public int GetMaxMp()
     {

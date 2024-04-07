@@ -97,8 +97,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6eb7387d7e974f4d8d6ebd0e4549319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: {fileID: 0}
+  item: {fileID: 0}
+  bag: {fileID: 0}
   name: Base Sword
-  description: Maybe it can be usefull... Maybe for damage...
+  descriptionText: 
+  parrent: {fileID: 0}
   AttSpeed: 0
-  damage: 1
+  damage: 0
   range: 1.4
