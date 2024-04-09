@@ -69,7 +69,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -1207,13 +1207,13 @@ TextureImporter:
       Worm Sprite Sheet_38: -304725810
       Worm Sprite Sheet_35: -830290638
       Worm Sprite Sheet_46: -2005996106
-      Worm Sprite Sheet_15: -1218140089
       Worm Sprite Sheet_47: 716105638
-      Worm Sprite Sheet_31: 1388198858
+      Worm Sprite Sheet_15: -1218140089
+      Worm Sprite Sheet_19: -2127744590
       Worm Sprite Sheet_4: -1418402470
       Worm Sprite Sheet_9: -1925759801
       Worm Sprite Sheet_37: -1009324983
-      Worm Sprite Sheet_19: -2127744590
+      Worm Sprite Sheet_31: 1388198858
       Worm Sprite Sheet_3: 1519359628
       Worm Sprite Sheet_36: 638241130
       Worm Sprite Sheet_8: -1991760667
