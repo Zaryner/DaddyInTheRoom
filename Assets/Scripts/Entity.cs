@@ -12,6 +12,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private int mp;
     [SerializeField] private float attSpd;
     [SerializeField] private int damage;
+    [SerializeField] private float speed;
     private Target target;
     private Target my_target;
     private bool isAttacking;
@@ -84,6 +85,18 @@ public class Entity : MonoBehaviour
     public int GetExp() { return exp; }
     public void AddExp(int exp) { this.exp += exp; }
     public int GetMaxExp() { return maxExp; }
+
+    public float Speed
+    {
+        get
+        {
+            return speed;
+        }
+        set 
+        { 
+            speed = value;
+        }
+    }
 
     public float GetAttSpd()
     {

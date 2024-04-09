@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
-    private Transform player;
-    private SpriteRenderer spriteRenderer;
     private Animator animator;
 
     private Target MeTarget;
@@ -19,7 +17,6 @@ public class Player : MonoBehaviour
     private TargetView targetView;
     private TargetView MeView;
 
-    private Collider2D dialogue;
 
     private Entity myEntity;
 
@@ -28,9 +25,6 @@ public class Player : MonoBehaviour
     private GameObject wentObject;
     private Target wentTarget;
     TargetFinder targetFinder;
-
-
-    [SerializeField] private float speed;
 
     private bool facing = true;
     private bool weaponize = false;
@@ -44,24 +38,22 @@ public class Player : MonoBehaviour
     {
         targetFinder = GetComponentInChildren<TargetFinder>();
         myEntity = GetComponent<Entity>();
-        player = GetComponent<Transform>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
         target = null;
         targetView = GameObject.FindWithTag("TargetView").GetComponent<TargetView>();
         targetView.UpdateTarget(null);
         MeView = GameObject.FindWithTag("MeView").GetComponent<TargetView>();
         MeTarget = GetComponent<Target>();
+        MeView.UpdateTarget(MeTarget);
     }
 
     void Update()
     {
-        MeView.UpdateTarget(MeTarget);
         attTimer -= Time.deltaTime;
         Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"),
             Input.GetAxis("Vertical"), 0).normalized;
         //if (Math.Abs(Input.GetAxis("Horizontal")) > 0.1f || Math.Abs(Input.GetAxis("Vertical")) > 0.1f)
-            player.transform.Translate(moveDir * speed * Time.deltaTime);
+            transform.Translate(moveDir * myEntity.Speed * Time.deltaTime);
         animator.SetFloat("Speed", Math.Abs(Input.GetAxis("Horizontal")) + Math.Abs(Input.GetAxis("Vertical")));
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
@@ -72,13 +64,13 @@ public class Player : MonoBehaviour
         {
             if (wentObject != null)
             {
-                if ((transform.position == Vector3.MoveTowards(transform.position, wentObject.transform.position, speed * Time.deltaTime)) || (targetFinder.StayOnTarget(wentTarget)))
+                if ((transform.position == Vector3.MoveTowards(transform.position, wentObject.transform.position, myEntity.Speed * Time.deltaTime)) || (targetFinder.StayOnTarget(wentTarget)))
                 {
                     StopMovement();
                 }
                 else
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, wentObject.transform.position, speed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, wentObject.transform.position, myEntity.Speed * Time.deltaTime);
                     animator.SetFloat("Speed", 1);
                 }
                 if (isGoingToAttackTarget && Vector2.Distance(transform.position, wentObject.transform.position) <= myEntity.GetWeapon().GetRange() - 0.1f)
