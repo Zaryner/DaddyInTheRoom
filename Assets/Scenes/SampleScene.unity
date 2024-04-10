@@ -5511,6 +5511,7 @@ GameObject:
   - component: {fileID: 1130614398}
   - component: {fileID: 1130614397}
   - component: {fileID: 1130614396}
+  - component: {fileID: 1130614400}
   m_Layer: 0
   m_Name: Gervood
   m_TagString: Untagged
@@ -5536,10 +5537,10 @@ MonoBehaviour:
   exp: 0
   maxMp: 10
   mp: 10
-  attSpd: 0
-  damage: 0
-  speed: 0
-  weapon: {fileID: 0}
+  attSpd: 1
+  damage: 1
+  speed: 4
+  weapon: {fileID: 6901612202733079064, guid: cfc907564a9b4ef4bb8c256ea5b13cff, type: 3}
 --- !u!114 &1130614397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5590,7 +5591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130614395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.91, y: -5.27, z: 0}
+  m_LocalPosition: {x: 1.03, y: -5.27, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5599,6 +5600,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1130614400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130614395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0fa6ac3940d324d97f756c2f9a6267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chase_radiuse: 0
+  agre_radius: 0
+  walk_radius: 8
+  home_point: {x: 0, y: 0, z: 0}
+  walk_point: {x: 0, y: 0, z: 0}
+  walk_cooldown: 8
+  one_walk_radius: 4
+  rest_timer: 0
+  walk: 0
+  skin: {fileID: 963110203}
+  skinOffset: 0
+  facing: 0
 --- !u!1 &1152328751
 GameObject:
   m_ObjectHideFlags: 0

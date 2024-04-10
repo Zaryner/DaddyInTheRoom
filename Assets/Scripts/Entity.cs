@@ -44,6 +44,7 @@ public class Entity : MonoBehaviour
     {
         SetTarget(t);
         if (isAttacking) return;
+        t.UnderAttack(my_target);
         isAttacking = true;
         StartCoroutine(Attack());
     }
@@ -68,6 +69,7 @@ public class Entity : MonoBehaviour
     public void StopAttack()
     {
         isAttacking = false;
+        StopAllCoroutines(); // can ba danger if more than 1 coroutine must be
     }
     public void SetTarget(Entity e)
     {

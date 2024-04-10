@@ -34,6 +34,18 @@ public class Target : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void UnderAttack(Target enemy)
+    {
+        if(type == TargetType.mob)
+        {
+            var enemy_script = GetComponent<Enemy>();
+            if(enemy_script != null)
+            {
+                enemy_script.StartAttack(enemy);
+            }
+        }
+    }
     public void AddExp(int exp)
     {
         if (type == TargetType.player)

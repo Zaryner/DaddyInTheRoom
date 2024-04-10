@@ -185,9 +185,26 @@ public class Player : MonoBehaviour
     }
     IEnumerator Attack()
     {
-        if(attTarget == null)
+        if (attTarget == null)
         {
             StopAttack();
+            yield break;
+        }
+        if (Vector2.Distance(transform.position, attTarget.transform.position) > myEntity.GetWeapon().GetRange())
+        {
+            StopMovement();
+            isAttacking = false;
+            myEntity.StopAttack();
+            for (int i = 1; i <= 3; i++)
+            {
+                string s = "Attack" + i;
+                animator.ResetTrigger(s);
+            }
+
+            wentTarget = attTarget;
+            wentObject = Instantiate(wentInvisiblePrefab, wentTarget.transform.position, Quaternion.identity);
+            isGoingToAttackTarget = true;
+
             yield break;
         }
         string att = "Attack" + UnityEngine.Random.Range(1, 4);
